@@ -1,5 +1,5 @@
 ---
-permalink: /giphy.html
+permalink: /index.html
 ---
 
 # giphy
