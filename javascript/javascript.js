@@ -125,6 +125,20 @@ $(document).ready(function () {
     // Call function to make buttons
     allButtons();
 
+    function addButton(show) {
+        if (topics.indexOf(show) === -1) {
+            topics.push(show);
+            $("#button-box").empty();
+            allButtons();
+        }
+    }
+
+    $("#submit").on("click", function () {
+        event.preventDefault();
+        addButton($("#foodhere").val().trim());
+        $("#foodhere").val("");
+        console.log("buttonmaking worked");
+    });
 
     // data.0.images.original.url
     // API testing 
