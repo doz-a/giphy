@@ -40,7 +40,7 @@ $(document).ready(function () {
 
             // API is http://api.giphy.com/v1/gifs/search?q=food&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=pg&limit=1
             // Working API, 10 limit, rating PG, search q
-            url: "http://api.giphy.com/v1/gifs/search?q=" + food +
+            url: "https://api.giphy.com/v1/gifs/search?q=" + food +
                 "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
             method: "GET"
         }).then(function (response) {
