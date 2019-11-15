@@ -1,10 +1,12 @@
 .btn {
     padding: 4px;
     border-radius: .9rem;
+    margin: 2px;
 }
 
 .individual-gif-container {
-    margin: 16px;
+    float: left;
+    margin: 2px;
 }
 
 p {
