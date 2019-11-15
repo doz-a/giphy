@@ -14,7 +14,7 @@ $(document).ready(function () {
     var topics = ["Pizza", "Tacos", "Burritos", "Pineapples", "Cat Food", "Croissants", "Burgers", "Tide Pods",];
 
     // Limit results to not break computer memory lmaooo
-    var limit = 5;
+    var limit = 10;
 
     // Rating 
     var rating = "PG";
@@ -24,28 +24,36 @@ $(document).ready(function () {
         for (var i = 0; i < topics.length; i++) {
             var makeButton = $("<button>");
             makeButton.addClass("btn");
+
+            // Bootstrap Stylin 
             makeButton.addClass("btn-info");
             makeButton.text(topics[i]);
             $("#button-box").append(makeButton, " ");
-
-            $(".btn-info").on("click", function () {
-                populateGifBox($(this).text());
-
-                // Clears button box every click 
-                $("#gif-box").empty();
-                // console.log("click works");
-            });
         }
+        $(".btn-info").on("click", function () {
+            populateGifBox($(this).text());
+
+            // Clears button box every click 
+            $("#gif-box").empty();
+            // console.log("click works");
+        });
+
     }
     // End button function 
 
     // Populate Gif Box function 
+
     function populateGifBox(food) {
         $.ajax({
-            // api key is http://api.giphy.com/v1/gifs/search?q=food&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=pg&limit=1 
-
+            // test random endpoint https://api.giphy.com/v1/gifs/random?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&tag=&rating=PG 
+            // api is http://api.giphy.com/v1/gifs/search?q=food&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=pg&limit=1 
             url: "http://api.giphy.com/v1/gifs/search?q=" + food +
                 "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
+            // test random endpoint
+            // url: "https://api.giphy.com/v1/gifs/random?q=" + food +
+            //     "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
+            // url: "https://api.giphy.com/v1/gifs/random?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&tag=" + food + "&rating=" + rating + "&limit=" + limit,
+
             method: "GET"
         }).then(function (response) {
 
@@ -53,6 +61,8 @@ $(document).ready(function () {
                 newDiv = $("<div>");
                 newDiv.addClass("individual-gif-container");
                 newDiv.append("<p>Rating: " + element.rating.toUpperCase() + "</p>");
+
+                // Displays image to HTML 
                 var newImage = $("<img src = '" + element.images.fixed_height_still.url + "'>");
                 newImage.addClass("gif-image");
                 newDiv.append(newImage);
@@ -63,6 +73,8 @@ $(document).ready(function () {
 
         });
     }
+    // End populate gif box function 
+
     // Call function to make buttons
     allButtons();
 
