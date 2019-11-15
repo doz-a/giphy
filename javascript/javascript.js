@@ -10,11 +10,11 @@ $(document).ready(function () {
     // });
     //API
 
-    // Topic is dinosaurs!
-    var topics = ["Tyrannosaurus", "Balaur", "Psittacosaurus", "Sauroposeidon", "Torosaurus", "Camarasaurus", "Brachiosaurus",]
+    // Topic is food!
+    var topics = ["Pizza", "Tacos", "Burritos", "Pineapples", "Cat Food", "Croissants", "Burgers", "Tide Pods",];
 
     // Limit results to not break computer memory lmaooo
-    var limit = "&limit=5";
+    var limit = 5;
 
     // Rating 
     var rating = "PG";
@@ -30,15 +30,21 @@ $(document).ready(function () {
 
             $(".btn-info").on("click", function () {
                 populateGifBox($(this).text());
+
+                // Clears button box every click 
+                $("#gif-box").empty();
                 // console.log("click works");
             });
         }
     }
+    // End button function 
 
-    function populateGifBox(dinosaur) {
+    // Populate Gif Box function 
+    function populateGifBox(food) {
         $.ajax({
-            // api key is http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=pg&limit=1 
-            url: "http://api.giphy.com/v1/gifs/search?q=" + dinosaur +
+            // api key is http://api.giphy.com/v1/gifs/search?q=food&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=pg&limit=1 
+
+            url: "http://api.giphy.com/v1/gifs/search?q=" + food +
                 "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
             method: "GET"
         }).then(function (response) {
