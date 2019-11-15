@@ -20,7 +20,7 @@ $(document).ready(function () {
     //API
 
     // Topic is food!
-    var topics = ["Pizza", "Tacos", "Burritos", "Pineapples", "Cat Food", "Croissants", "Burgers", "Cats", "Tide Pods"];
+    var topics = ["Pizza", "Tacos", "Burritos", "Avocados", "Potatoes", "Calamari", "Raspberries", "Pineapples", "Cat Food", "Croissants", "Burgers", "Cats", "Tide Pods"];
 
     // Limit results to not break computer memory lmaooo
     var limit = 10;
@@ -51,7 +51,6 @@ $(document).ready(function () {
     // End button function 
 
     // Populate Gif Box function 
-
     function populateGifBox(food) {
         $.ajax({
             // test random endpoint https://api.giphy.com/v1/gifs/random?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&tag=&rating=PG 
@@ -59,7 +58,7 @@ $(document).ready(function () {
             // url: "http://api.giphy.com/v1/gifs/search?q=" + food +
             //     "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
 
-            // Working API, 10 limit, rating PG
+            // Working API, 10 limit, rating PG, search q
             url: "http://api.giphy.com/v1/gifs/search?q=" + food +
                 "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
             // url: "https://api.giphy.com/v1/gifs/random?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&tag=" + food + "&rating=PG",
@@ -71,12 +70,12 @@ $(document).ready(function () {
 
             method: "GET"
         }).then(function (response) {
-            // test console
-            console.log("it works");
+
+            // Creates div for each gif
+            // console.log("it works");
             response.data.forEach(function (element) {
                 newDiv = $("<div>");
                 newDiv.addClass("individual-gif-container");
-                newDiv.append("<p>Rating: " + element.rating.toUpperCase() + "</p>");
 
                 // Displays still image to HTML 
                 var newImage = $("<img src = '" + element.images.fixed_height_still.url + "'>");
@@ -87,6 +86,9 @@ $(document).ready(function () {
                 newImage.attr("data-still", element.images.fixed_height_still.url);
                 newImage.attr("data-animate", element.images.fixed_height.url);
                 newDiv.append(newImage);
+
+                // Adds rating
+                newDiv.append("<p>Rating: " + element.rating.toUpperCase() + "</p>");
                 $("#gif-box").append(newDiv);
 
                 // console.log("ajax works");
@@ -100,12 +102,20 @@ $(document).ready(function () {
                 // If the clicked image's state is still, update its src attribute to what its data-animate value is.
                 // Then, set the image's data-state to animate
                 // Else set src to the data-still value
-                if (state === "still") {
-                    $(this).attr("src", $(this).attr("data-animate"));
-                    $(this).attr("data-state", "animate");
-                } else {
+                if (state === "animate") {
+                    // $(this).attr("src", $(this).attr("data-animate"));
+                    // $(this).attr("data-state", "animate");
                     $(this).attr("src", $(this).attr("data-still"));
                     $(this).attr("data-state", "still");
+                    console.log("animate activate");
+                    console.log(state);
+                } else {
+                    // $(this).attr("src", $(this).attr("data-still"));
+                    // $(this).attr("data-state", "still");
+                    $(this).attr("src", $(this).attr("data-animate"));
+                    $(this).attr("data-state", "animate");
+                    console.log("still activate");
+                    console.log(state);
                 }
             });
         });
