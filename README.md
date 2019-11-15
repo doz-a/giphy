@@ -15,5 +15,7 @@ General Usage Notes
 -Giphys populate in still mode, and can move between the still and animated states on click
 -All Giphys are rated PG or under, max of 10 giphys
 -Each click of a different button empties the gif div, then repopulates with the new button
+-Turkey button has a really funny 1st gif just in time for thanksgiving ahaha
+
 
 Copyright: None
