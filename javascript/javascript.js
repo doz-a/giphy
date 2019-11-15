@@ -38,20 +38,9 @@ $(document).ready(function () {
 
             // Test random endpoint (for future edits) https://api.giphy.com/v1/gifs/random?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&tag=&rating=PG 
 
-            // API is http://api.giphy.com/v1/gifs/search?q=food&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=pg&limit=1
+            // API is https://api.giphy.com/v1/gifs/search?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&q=food&limit=10&offset=0&rating=PG&lang=en
             // Working API, 10 limit, rating PG, search q
-
-
-            // url: "https://api.giphy.com/v1/gifs/search?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&q=&limit=25&offset=0&rating=G&lang=en",
-
-            // Test to see if working on github:
-            // url: "https://api.giphy.com/v1/gifs/search?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&q=" + food + "&limit=" + limit + "&rating=" + rating + "lang=en",
-
             url: "https://api.giphy.com/v1/gifs/search?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&q=" + food + "&limit=" + limit + "&offset=0&rating=" + rating + "&lang=en",
-
-            // Not working on github
-            // url: "https://api.giphy.com/v1/gifs/search?q=" + food +
-            //     "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
             method: "GET"
         }).then(function (response) {
 
