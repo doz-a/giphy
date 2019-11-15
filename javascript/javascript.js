@@ -40,8 +40,16 @@ $(document).ready(function () {
 
             // API is http://api.giphy.com/v1/gifs/search?q=food&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=pg&limit=1
             // Working API, 10 limit, rating PG, search q
-            url: "https://api.giphy.com/v1/gifs/search?q=" + food +
-                "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
+
+
+            // url: "https://api.giphy.com/v1/gifs/search?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&q=&limit=25&offset=0&rating=G&lang=en",
+
+            // Test to see if working on github:
+            url: "https://api.giphy.com/v1/gifs/search?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&q=" + food + "&limit=" + limit + "&rating=" + rating + "lang=en",
+
+            // Not working on github
+            // url: "https://api.giphy.com/v1/gifs/search?q=" + food +
+            //     "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
             method: "GET"
         }).then(function (response) {
 
