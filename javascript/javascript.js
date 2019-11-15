@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
     // Topic is food!
-    var topics = ["Pizza", "Tacos", "Burritos", "Avocados", "Potatoes", "Calamari", "Raspberries", "Pineapples", "Cat Food", "Croissants", "Burgers", "Cats", "Tide Pods"];
+    var topics = ["Pizza", "Tacos", "Burritos", "Avocados", "Potatoes", "Calamari", "Raspberries", "Pineapples", "Cat Food", "Croissants", "Burgers", "Cats", "Pop Tarts", "S'Mores", "Turkey"];
 
     // Limit results to not break computer memory lmaooo
     var limit = 10;
@@ -96,6 +96,10 @@ $(document).ready(function () {
             topics.push(show);
             $("#button-box").empty();
             allButtons();
+
+            // Filler for gif box (keeps the black bg from shrinking)
+            filler = $("<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>");
+            $("#gif-box").append(filler);
         }
     }
 
