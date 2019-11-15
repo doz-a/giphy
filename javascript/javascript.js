@@ -1,23 +1,4 @@
 $(document).ready(function () {
-    // To Do 
-    // - Make the search into random endpoint
-    // - When user clicks on image, change src to the moving giphy
-    // - When user clicks on moving image, change src to still giphy
-
-    // - User Input Box
-    // - When text is input the box, it adds a functioning button to topics array
-
-
-
-    // Example queryURL for Giphy API
-    // var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&q=dinosaur&limit=10&offset=0&rating=PG-13&lang=en";
-    // $.ajax({
-    //     url: queryURL,
-    //     method: "GET"
-    // }).then(function (response) {
-    //     console.log(response.data);
-    // });
-    //API
 
     // Topic is food!
     var topics = ["Pizza", "Tacos", "Burritos", "Avocados", "Potatoes", "Calamari", "Raspberries", "Pineapples", "Cat Food", "Croissants", "Burgers", "Cats", "Tide Pods"];
@@ -34,17 +15,18 @@ $(document).ready(function () {
             var makeButton = $("<button>");
             makeButton.addClass("btn");
 
-            // Bootstrap Stylin 
-            makeButton.addClass("btn-info");
+            // Bootstrap stylin these buttons, add buttons to button box
+            makeButton.addClass("btn-light");
             makeButton.text(topics[i]);
             $("#button-box").append(makeButton, " ");
         }
-        $(".btn-info").on("click", function () {
+
+        // On click of a button, populates the gif box
+        $(".btn-light").on("click", function () {
             populateGifBox($(this).text());
 
             // Clears button box every click 
             $("#gif-box").empty();
-            // console.log("click works");
         });
 
     }
@@ -53,26 +35,17 @@ $(document).ready(function () {
     // Populate Gif Box function 
     function populateGifBox(food) {
         $.ajax({
-            // test random endpoint https://api.giphy.com/v1/gifs/random?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&tag=&rating=PG 
-            // api is http://api.giphy.com/v1/gifs/search?q=food&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=pg&limit=1 
-            // url: "http://api.giphy.com/v1/gifs/search?q=" + food +
-            //     "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
 
+            // Test random endpoint (for future edits) https://api.giphy.com/v1/gifs/random?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&tag=&rating=PG 
+
+            // API is http://api.giphy.com/v1/gifs/search?q=food&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=pg&limit=1
             // Working API, 10 limit, rating PG, search q
             url: "http://api.giphy.com/v1/gifs/search?q=" + food +
                 "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
-            // url: "https://api.giphy.com/v1/gifs/random?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&tag=" + food + "&rating=PG",
-
-            // test random endpoint
-            // url: "https://api.giphy.com/v1/gifs/random?q=" + food +
-            //     "&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&rating=" + rating + "&limit=" + limit,
-            // url: "https://api.giphy.com/v1/gifs/random?api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&tag=" + food + "&rating=" + rating + "&limit=" + limit,
-
             method: "GET"
         }).then(function (response) {
 
             // Creates div for each gif
-            // console.log("it works");
             response.data.forEach(function (element) {
                 newDiv = $("<div>");
                 newDiv.addClass("individual-gif-container");
@@ -89,9 +62,9 @@ $(document).ready(function () {
 
                 // Adds rating
                 newDiv.append("<p>Rating: " + element.rating.toUpperCase() + "</p>");
-                $("#gif-box").append(newDiv);
 
-                // console.log("ajax works");
+                // Append to gif box 
+                $("#gif-box").append(newDiv);
             });
 
             // Animate and still of the giphy using clicks
@@ -99,23 +72,15 @@ $(document).ready(function () {
 
                 // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
                 var state = $(this).attr("data-state");
-                // If the clicked image's state is still, update its src attribute to what its data-animate value is.
-                // Then, set the image's data-state to animate
-                // Else set src to the data-still value
+
+                // Changes to animate gif if still, or still gif if animated 
                 if (state === "animate") {
-                    // $(this).attr("src", $(this).attr("data-animate"));
-                    // $(this).attr("data-state", "animate");
                     $(this).attr("src", $(this).attr("data-still"));
                     $(this).attr("data-state", "still");
-                    console.log("animate activate");
-                    console.log(state);
+
                 } else {
-                    // $(this).attr("src", $(this).attr("data-still"));
-                    // $(this).attr("data-state", "still");
                     $(this).attr("src", $(this).attr("data-animate"));
                     $(this).attr("data-state", "animate");
-                    console.log("still activate");
-                    console.log(state);
                 }
             });
         });
@@ -125,6 +90,7 @@ $(document).ready(function () {
     // Call function to make buttons
     allButtons();
 
+    // Add button function 
     function addButton(show) {
         if (topics.indexOf(show) === -1) {
             topics.push(show);
@@ -133,16 +99,11 @@ $(document).ready(function () {
         }
     }
 
+    // Makes a button using the input from submit 
     $("#submit").on("click", function () {
         event.preventDefault();
         addButton($("#foodhere").val().trim());
         $("#foodhere").val("");
         console.log("buttonmaking worked");
     });
-
-    // data.0.images.original.url
-    // API testing 
-    // var xhr = $.get("http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=nPsGacEw599ZV3kh8FmX95ZE8WEXSxha&limit=1");
-    // xhr.done(function (data) { console.log("success got data", data); });
-
 })
